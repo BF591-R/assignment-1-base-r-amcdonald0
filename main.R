@@ -114,7 +114,7 @@ row_medians <- function(x) {
 #' summarize_rows(m, mean)
 #' [1] 2 5 8
 summarize_rows <- function(x, fn, na.rm=FALSE) {
-    apply(x, 1, fn, na.rm = na.rm)
+    apply(x, 1, function(row) fn(row, na.rm = na.rm))
 }
 
 #' Summarize matrix rows into data frame
@@ -154,7 +154,39 @@ summarize_rows <- function(x, fn, na.rm=FALSE) {
 #' 3 -0.09040182 1.027559 -0.02774705 -3.026888 2.353087      130              54      0
 #' 4  0.09518138 1.030461  0.11294781 -3.409049 2.544992       90              72      0
 summarize_matrix <- function(x, na.rm=FALSE) {
-    return(NULL)
+  # Function to summarize a single row
+  summarize_row <- function(row) {
+    # Calculate basic statistics
+    mean_val <- mean(row, na.rm = na.rm)
+    stdev_val <- sd(row, na.rm = na.rm)
+    median_val <- median(row, na.rm = na.rm)
+    min_val <- min(row, na.rm = na.rm)
+    max_val <- max(row, na.rm = na.rm)
+    
+    # Count specific conditions
+    num_lt_0 <- sum(row < 0, na.rm = TRUE)
+    num_btw_1_and_5 <- sum(row >= 1 & row <= 5, na.rm = TRUE)
+    num_na <- sum(is.na(row))
+    
+    # Return a list of results
+    return(c(mean = mean_val,
+             stdev = stdev_val,
+             median = median_val,
+             min = min_val,
+             max = max_val,
+             num_lt_0 = num_lt_0,
+             num_btw_1_and_5 = num_btw_1_and_5,
+             num_na = num_na))
+  }
+  
+  # Apply the summarization function row-wise
+  result <- t(apply(x, 1, summarize_row))
+  
+  # Convert the result to a data frame
+  result_df <- as.data.frame(result)
+  
+  # Return the resulting data frame
+  return(result_df)
 }
 
 # ------------ Helper Functions Used By Assignment, You May Ignore ------------
