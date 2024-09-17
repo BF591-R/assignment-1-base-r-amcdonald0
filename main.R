@@ -18,12 +18,7 @@
 #' less_than_zero(c(-1,0,1,2,3,4))
 #' [1] TRUE FALSE FALSE FALSE FALSE FALSE
 less_than_zero <- function(x) {
-    if (x < 0){
-      return(TRUE)
-    }
-  else{
-    return(FALSE)
-  }
+  return(x < 2)
 }
 
 #' Evaluate whether the argument is between two numbers
@@ -89,7 +84,7 @@ rm_na <- function(x) {
 #' [1] 1 4 7
 #' 
 row_medians <- function(x) {
-    apply(mat, 1, median, na.rm = TRUE)
+    apply(x, 1, median, na.rm = TRUE)
 }
 
 #' Evaluate each row of a matrix with a provided function
