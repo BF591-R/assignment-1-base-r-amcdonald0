@@ -18,7 +18,7 @@
 #' less_than_zero(c(-1,0,1,2,3,4))
 #' [1] TRUE FALSE FALSE FALSE FALSE FALSE
 less_than_zero <- function(x) {
-  return(x < 2)
+  return(x < 0)
 }
 
 #' Evaluate whether the argument is between two numbers
@@ -44,11 +44,8 @@ less_than_zero <- function(x) {
 #' [2,]  TRUE FALSE FALSE
 #' [3,] FALSE FALSE FALSE
 is_between <- function(x, a, b) {
-    if (x >= a && x <= b){
-      return(TRUE)
-    } else{
-      return(FALSE)
-    }
+  
+  return(x > a & x < b)
 }
 
 #' Return the values of the input vector that are not NA
@@ -160,7 +157,7 @@ summarize_matrix <- function(x, na.rm=FALSE) {
     
     # Count specific conditions
     num_lt_0 <- sum(row < 0, na.rm = TRUE)
-    num_btw_1_and_5 <- sum(row >= 1 & row <= 5, na.rm = TRUE)
+    num_btw_1_and_5 <- sum(row > 1 & row < 5, na.rm = TRUE)
     num_na <- sum(is.na(row))
     
     # Return a list of results
