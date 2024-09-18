@@ -34,7 +34,10 @@ way to see how many values are `TRUE` in a logical vector by summing it:
 ```{r, message=FALSE}
 sum(less_than_zero(x))
 ```
+```{r,message=FALSE}
+less_than_zero(-1)
 
+```
 ## 2. More Complicated Logical Tests
 
 We sometimes have to write tests that check for more complex criteria. For

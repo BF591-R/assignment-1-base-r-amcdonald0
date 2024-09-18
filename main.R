@@ -44,8 +44,8 @@ less_than_zero <- function(x) {
 #' [2,]  TRUE FALSE FALSE
 #' [3,] FALSE FALSE FALSE
 is_between <- function(x, a, b) {
-    if (x >= a & x <= b){
-      return(FALSE)
+    if (x >= a && x <= b){
+      return(TRUE)
     } else{
       return(FALSE)
     }
